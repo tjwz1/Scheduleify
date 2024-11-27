@@ -5,26 +5,36 @@ from Schedule import *
 
 
 def dp_schedule(class_map):
-    best_schedule = Week()
-    best_num_classes = 0
-    schedule_states = [best_schedule.copy()]
+    credit_limit = 18
+    max_classes = 0
+    final_schedule = Week()
+    schedule_states = {0: (Week(), 0)}
+
     for class_name, uf_classes in class_map.items():
-        for uf_class in uf_classes:
-            for section in uf_class.sections:
-                current_state = schedule_states[-1].copy()
+        next_states = {}
 
-                if current_state.add_class(section):
-                    num_classes = sum([len(day.classes) for day in current_state.days.values()])
+        for current_credits, (current_schedule, current_num_classes) in schedule_states.items():
+            for uf_class in uf_classes:
+                for section in uf_class.sections:
+                    new_schedule = current_schedule.copy()
 
-                    if num_classes > best_num_classes:
-                        best_num_classes = num_classes
-                        best_schedule = current_state.copy()
-                    schedule_states.append(current_state)
+                    if new_schedule.add_class(section):
+                        new_credits = current_credits + section.credit
 
-                    current_state.remove_class(section)
-                else:
-                    continue
-    return best_schedule, best_num_classes
+                        if new_credits > credit_limit:
+                            new_schedule.remove_class(section)
+                            continue
+                        new_num_classes = sum(len(day.classes) for day in new_schedule.days.values())
+                        if new_num_classes > max_classes or (
+                                new_num_classes == max_classes and new_credits > best_num_credits):
+                            max_classes = new_num_classes
+                            final_schedule = new_schedule.copy()
+                            best_num_credits = new_credits
+                        if new_credits not in next_states:
+                            next_states[new_credits] = (new_schedule, new_num_classes)
+        schedule_states = next_states
+
+    return final_schedule, max_classes, best_num_credits
 
 
 def print_schedule(s):
@@ -140,8 +150,8 @@ if __name__ == "__main__":
                 new_class = parse_data(course, data)
                 classMap[course] = new_class
 
-                print(f"Raw Response for {course}:")
-                print(data)
+                #print(f"Raw Response for {course}:")
+                #print(data)
 
             else:
                 print(f"Error for {course}: {response.status_code}")
@@ -149,7 +159,7 @@ if __name__ == "__main__":
 
         except requests.exceptions.RequestException as e:
             print(f"An error occurred for {course}: {e}")
-    best_schedule, best_num_classes = dp_schedule(classMap)
-    # print_class_map(classMap)
-    # schedule.greedy_schedule(classMap)
-    print_schedule(best_schedule)
+    #best_schedule, best_num_classes, c = dp_schedule(classMap)
+    #print_class_map(classMap)
+    schedule.greedy_schedule(classMap)
+    print_schedule(schedule)

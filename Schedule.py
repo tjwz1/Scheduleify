@@ -31,7 +31,7 @@ class Day:
         for i in range(len(self.classes)):
             if self.classes[i] == section:
                 self.classes[i] = None  # Remove class from the period
-        print(f"Removed {section.name} from the schedule.")
+        #print(f"Removed {section.name} from the schedule.")
 
 
 '''
@@ -60,18 +60,18 @@ class Week:
 
     def add_class(self, section):
         if section.code in self.courses:
-            print(f"Course {section.code} is already scheduled.")
+            #print(f"Course {section.code} is already scheduled.")
             return False
         for meeting in section.meetings:
             for day in meeting["days"]:
                 full_day = self.day_mapping.get(day, day)
                 if full_day not in self.days:
-                    print(f"Invalid meeting day for {section.code}")
+                    #print(f"Invalid meeting day for {section.code}")
                     return False
                 if not self.days[full_day].add_class(section, meeting["start_period"], meeting["end_period"]):
                     return False
         self.courses.add(section.code)
-        print(f"{section.code} added to schedule")
+        #print(f"{section.code} added to schedule")
         return True
 
     def remove_class(self, section):
@@ -99,19 +99,19 @@ class Week:
     '''
 
     def greedy_schedule(self, class_map):
-        # total_credits = 0;
+        total_credits = 0;
         for class_name, uf_classes in class_map.items():
-            # if total_credits > 18:
-            # print("Max credit amount reached")
-            # break
-            print(f"\nProcessign class: {class_name}")
+            if total_credits > 18:
+                print("Max credit amount reached")
+                break
+            #print(f"\nProcessign class: {class_name}")
             for uf_class in uf_classes:
                 print(f"  Scheduling: {uf_class.name} - {uf_class.description}")
                 for section in uf_class.sections:
                     print(f"    Scheduling section for {uf_class.name}")
                     if self.add_class(section):
                         print(f"      {uf_class.name} successfully added")
-                        # total_credits += section.credit
+                        total_credits += section.credit
                         break
                     else:
                         print(f"      {uf_class.name} unsuccessfully added")
@@ -141,30 +141,3 @@ class Week:
                         print(
                             f"      Could not add {uf_class.name} to the schedule due to conflicts.")
         '''
-
-    def dp_schedule(self, class_map):
-        best_schedule = {day: Day() for day in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]}
-        best_num_classes = 0
-        schedule_states = [copy.deepcopy(best_schedule)]
-
-        for class_name, uf_classes in class_map.items():
-            for uf_class in uf_classes:
-                for section in uf_class.sections:
-                    current_state = copy.deepcopy(schedule_states[-1])
-                    if self.add_class(section):
-                        num_classes = sum([len(day.classes) for day in current_state.values()])
-                        if num_classes > best_num_classes:
-                            best_num_classes = num_classes
-                            best_schedule = copy.deepcopy(current_state)
-
-                        schedule_states.append(copy.deepcopy(current_state))
-                        self.remove_class(section)
-                    else:
-                        continue
-        self.days = best_schedule
-
-    def get_current_schedule_state(self):
-        current_state = {day: Day() for day in self.days}
-        for day, day_obj in self.days.items():
-            current_state[day].classes = day_obj.classes.copy()  # Deep copy the classes
-        return current_state
