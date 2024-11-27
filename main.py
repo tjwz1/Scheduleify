@@ -159,7 +159,7 @@ if __name__ == "__main__":
 
         except requests.exceptions.RequestException as e:
             print(f"An error occurred for {course}: {e}")
-    #best_schedule, best_num_classes, max_credits = dp_schedule(classMap)
+    #best_schedule, best_num_classes, c = dp_schedule(classMap)
     #print_class_map(classMap)
     schedule.greedy_schedule(classMap)
     print_schedule(schedule)
