@@ -34,18 +34,6 @@ class Day:
         #print(f"Removed {section.name} from the schedule.")
 
 
-'''
-    def has_conflict(self, section):
-        for c in self.classes:
-            for meeting in section.meetings:
-                for existing_meeting in c.meetings:
-                    if not (meeting['end_period'] < existing_meeting['start_period'] or meeting['start_period'] >
-                            existing_meeting['end_period']):
-                        return True
-        return False
-'''
-
-
 class Week:
     def __init__(self):
         self.days = {day: Day() for day in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]}
@@ -86,20 +74,8 @@ class Week:
     def copy(self):
         return copy.deepcopy(self)
 
-    '''
-        for day in section.days:
-            full_day = self.day_mapping.get(day, day)
-            if full_day not in self.days:
-                raise ValueError(f"Invalid day '{day}' in section {section.name}")
-            if not self.days[full_day].add_class(section, section.meetings["start_period"],
-                                                 section.meetings["end_period"]):
-                print(f"Could not schedule {section.name} on {full_day}")
-                return False
-        return True
-    '''
-
     def greedy_schedule(self, class_map):
-        total_credits = 0;
+        total_credits = 0
         for class_name, uf_classes in class_map.items():
             if total_credits > 18:
                 print("Max credit amount reached")
@@ -115,29 +91,18 @@ class Week:
                         break
                     else:
                         print(f"      {uf_class.name} unsuccessfully added")
-        '''
-        for class_name, uf_classes in class_map.items():
-            print(f"\nProcessing class: {class_name}")
 
-            for uf_class in uf_classes:
-                print(f"  Scheduling UFClass: {uf_class.name} - {uf_class.description}")
 
-                for section in uf_class.sections:
-                    can_add = True
-                    print(f"    Trying to schedule Section: {uf_class.name}, Credits: {section.credit}")
-
-                    for day in section.meetings:
-                        for meet_day in day['days']:
-                            full_day = self.day_mapping.get(meet_day, meet_day)
-                            if not self.days[full_day].add_class(section):
-                                print(f"      Could not schedule {uf_class.name} on {full_day}.")
-                                can_add = False
-                                break
-                        if not can_add:
-                            break
-                      if can_add:
-                        print(f"      Added {uf_class.name} to the schedule.")
-                    else:
-                        print(
-                            f"      Could not add {uf_class.name} to the schedule due to conflicts.")
-        '''
+def greedy_schedule(class_map):
+    week = Week()
+    total_credits = 0
+    for class_name, uf_classes in class_map.items():
+        if total_credits > 18:
+            print("Max credit amount reached")
+            break
+        for uf_class in uf_classes:
+            for section in uf_class.sections:
+                if week.add_class(section):
+                    total_credits += section.credit
+                    break
+    return week, total_credits
