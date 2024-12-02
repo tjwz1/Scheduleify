@@ -55,7 +55,6 @@ def parse_data(class_name, class_data):
 
         for c in courses:
             sections_data = c.get("sections", [])
-            description = c.get("description", "No description available")
             class_name = c.get('name', " ")
             code = c.get("code", " ")
             uf_class = UFClass(name=class_name, sections=[], description=description)

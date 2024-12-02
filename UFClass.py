@@ -1,8 +1,7 @@
 class UFClass:
-    def __init__(self, name, sections, description):
+    def __init__(self, name, sections):
         self.name = name
         self.sections = sections
-        self.description = description
 
     def __repr__(self):
         return f"UFClass(name={self.name}, sections={len(self.sections)})"
@@ -12,8 +11,7 @@ class UFClass:
 
 
 class Section:
-    def __init__(self, credit, name, description, code):
-        self.description = description
+    def __init__(self, credit, name, code):
         self.credit = credit
         self.name = name
         self.meetings = []
