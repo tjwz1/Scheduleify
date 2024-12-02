@@ -13,7 +13,6 @@ class UFClass:
 class Section:
     def __init__(self, credit, name, code):
         self.credit = credit
-        self.name = name
         self.meetings = []
         self.code = code
 

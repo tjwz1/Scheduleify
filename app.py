@@ -57,11 +57,11 @@ def parse_data(class_name, class_data):
             sections_data = c.get("sections", [])
             class_name = c.get('name', " ")
             code = c.get("code", " ")
-            uf_class = UFClass(name=class_name, sections=[], description=description)
+            uf_class = UFClass(name=class_name, sections=[])
             for s in sections_data:
                 credit = s.get("credits")
                 meet_times = s.get("meetTimes", [])
-                section = Section(credit=credit, name=class_name, description=description, code=code)
+                section = Section(credit=credit, code=code)
                 for meet_time in meet_times:
                     days = meet_time.get("meetDays", [])
                     start_period = meet_time.get("meetPeriodBegin", 0)
