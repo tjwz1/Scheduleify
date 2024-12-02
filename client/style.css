@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     height: 100%;
-    width: 130px;
+    width: 175px;
     background-color: #122686;
     color: #fff;
     padding: 20px;
@@ -61,7 +61,7 @@
   .main-block {
     display: flex;
     flex: nowrap;
-    margin-left: 170px;
+    margin-left: 215px;
     padding: 10px
 
   }
