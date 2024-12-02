@@ -60,15 +60,14 @@ def print_schedule(s):
 
 
 def print_class_map(class_map):
-    for class_name, uf_classes in class_map.items():
+    for uf_classes in class_map.items():
         for uf_class in uf_classes:
             print(f"\nClass Name: {uf_class.name}")
-            print(f"Description: {uf_class.description}")
+            print(f"\nClass Code: {uf_class.code}")
             print(f"Sections:")
 
             for section in uf_class.sections:
-                print(f"  Class code: {section.code}")
-                print(f"  Class name: {section.name}")
+                print(f"  Section code: {section.code}")
                 print(f"  Credits: {section.credit}")
                 print(f"  Meeting Times:")
 
@@ -90,22 +89,28 @@ def parse_data(class_name, class_data):
         if not courses:
             raise ValueError(f"No course data found for {class_name}: {response_data}")
 
-        for c in courses:
-            sections_data = c.get("sections", [])
-            class_name = c.get('name', " ")
-            code = c.get("code", " ")
-            uf_class = UFClass(name=class_name, sections=[])
-            for s in sections_data:
-                credit = s.get("credits")
-                meet_times = s.get("meetTimes", [])
-                section = Section(credit=credit, code=code)
+        for each_course in courses:
+            sections_data = each_course.get("sections", [])
+            class_name = each_course.get('name', " ")
+            class_code = each_course.get("code", " ")
+            uf_class = UFClass(name=class_name, sections=[], code=class_code)
+
+            for each_section in sections_data:
+                credit = each_section.get("credits")
+                meet_times = each_section.get("meetTimes", [])
+                section_code = each_section.get("classNumber", 0)
+                section = Section(credit=credit, code=section_code)
+
                 for meet_time in meet_times:
                     days = meet_time.get("meetDays", [])
                     start_period = meet_time.get("meetPeriodBegin", 0)
                     end_period = meet_time.get("meetPeriodEnd", 0)
                     section.add_meeting(start_period=start_period, end_period=end_period, days=days)
+
                 uf_class.sections.append(section)
+            
             uf_classes.append(uf_class)
+            
     return uf_classes
 
 
