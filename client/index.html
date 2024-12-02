@@ -1,242 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Scheduleify</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <main class="main">
-            <aside class="sidebar">
-                <div class="sidebar-header">
-                    <h2>Scheduleify</h2>
-                </div>
-                <nav class="sidebar-links">
-                    <p>Input class here</p>
-                    <ul>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                        <li>6</li>
-                    </ul>
-                    Total credit currently
-                </nav>
-            </aside>
-            <div class="main-block">
-                <div class="block">
-                    <p>Schedule built using algo 1</p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Periods\Day</th>
-                                <th>M</th>
-                                <th>T</th>
-                                <th>W</th>
-                                <th>R</th>
-                                <th>F</th>
-                            </tr>
-                        </thead>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scheduleify</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="main">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Scheduleify</h2>
+            </div>
+            <nav class="sidebar-links">
+                <p>Input your courses below:</p>
+                <input type="text" id="course-input" placeholder="Enter courses (e.g., COP3530, CEN3031)">
+                <button id="generate-schedules">Generate Schedule</button>
+                <p>Total Credits:</p>
+                <p>Greedy: <span id="greedy-credits">0</span></p>
+                <p>DP: <span id="dp-credits">0</span></p>
+            </nav>
+        </aside>
+        <div class="main-block">
+            <div class="block">
+                <p>Schedule built using Greedy Algorithm</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Periods\Day</th>
+                            <th>M</th>
+                            <th>T</th>
+                            <th>W</th>
+                            <th>R</th>
+                            <th>F</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Rows for each period -->
                         <tbody>
                             <tr>
                                 <td>1 7:25-8:15</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="greedy-monday-period-1"></td>
+                                <td id="greedy-tuesday-period-1"></td>
+                                <td id="greedy-wednesday-period-1"></td>
+                                <td id="greedy-thursday-period-1"></td>
+                                <td id="greedy-friday-period-1"></td>
                             </tr>
                             <tr>
                                 <td>2 8:30-9:20</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="greedy-monday-period-2"></td>
+                                <td id="greedy-tuesday-period-2"></td>
+                                <td id="greedy-wednesday-period-2"></td>
+                                <td id="greedy-thursday-period-2"></td>
+                                <td id="greedy-friday-period-2"></td>
                             </tr>
                             <tr>
                                 <td>3 9:35-10:25</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="greedy-monday-period-3"></td>
+                                <td id="greedy-tuesday-period-3"></td>
+                                <td id="greedy-wednesday-period-3"></td>
+                                <td id="greedy-thursday-period-3"></td>
+                                <td id="greedy-friday-period-3"></td>
                             </tr>
                             <tr>
                                 <td>4 10:40-11:30</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="greedy-monday-period-4"></td>
+                                <td id="greedy-tuesday-period-4"></td>
+                                <td id="greedy-wednesday-period-4"></td>
+                                <td id="greedy-thursday-period-4"></td>
+                                <td id="greedy-friday-period-4"></td>
                             </tr>
                             <tr>
                                 <td>5 11:45-12:35</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="greedy-monday-period-5"></td>
+                                <td id="greedy-tuesday-period-5"></td>
+                                <td id="greedy-wednesday-period-5"></td>
+                                <td id="greedy-thursday-period-5"></td>
+                                <td id="greedy-friday-period-5"></td>
                             </tr>
                             <tr>
                                 <td>6 12:50-1:40</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="greedy-monday-period-6"></td>
+                                <td id="greedy-tuesday-period-6"></td>
+                                <td id="greedy-wednesday-period-6"></td>
+                                <td id="greedy-thursday-period-6"></td>
+                                <td id="greedy-friday-period-6"></td>
                             </tr>
                             <tr>
                                 <td>7 1:55-2:45</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="greedy-monday-period-7"></td>
+                                <td id="greedy-tuesday-period-7"></td>
+                                <td id="greedy-wednesday-period-7"></td>
+                                <td id="greedy-thursday-period-7"></td>
+                                <td id="greedy-friday-period-7"></td>
                             </tr>
                             <tr>
                                 <td>8 3:00-3:50</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="greedy-monday-period-8"></td>
+                                <td id="greedy-tuesday-period-8"></td>
+                                <td id="greedy-wednesday-period-8"></td>
+                                <td id="greedy-thursday-period-8"></td>
+                                <td id="greedy-friday-period-8"></td>
                             </tr>
                             <tr>
                                 <td>9 4:05-4:55</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="greedy-monday-period-9"></td>
+                                <td id="greedy-tuesday-period-9"></td>
+                                <td id="greedy-wednesday-period-9"></td>
+                                <td id="greedy-thursday-period-9"></td>
+                                <td id="greedy-friday-period-9"></td>
                             </tr>
                             <tr>
                                 <td>10 5:10-6:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="greedy-monday-period-10"></td>
+                                <td id="greedy-tuesday-period-10"></td>
+                                <td id="greedy-wednesday-period-10"></td>
+                                <td id="greedy-thursday-period-10"></td>
+                                <td id="greedy-friday-period-10"></td>
                             </tr>
                             <tr>
                                 <td>11 6:15-7:05</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="greedy-monday-period-11"></td>
+                                <td id="greedy-tuesday-period-11"></td>
+                                <td id="greedy-wednesday-period-11"></td>
+                                <td id="greedy-thursday-period-11"></td>
+                                <td id="greedy-friday-period-11"></td>
                             </tr>
                         </tbody>
-                    </table>
-                </div>
-                <div class="block">
-                    <p>
-                    Schedule built using algo 2
-                    </p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Periods\Day</th>
-                                <th>M</th>
-                                <th>T</th>
-                                <th>W</th>
-                                <th>R</th>
-                                <th>F</th>
-                            </tr>
-                        </thead>
+                        
+                    </tbody>
+                </table>
+            </div>
+            <div class="block">
+                <p>Schedule built using DP Algorithm</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Periods\Day</th>
+                            <th>M</th>
+                            <th>T</th>
+                            <th>W</th>
+                            <th>R</th>
+                            <th>F</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Rows for each period -->
                         <tbody>
                             <tr>
                                 <td>1 7:25-8:15</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="dp-monday-period-1"></td>
+                                <td id="dp-tuesday-period-1"></td>
+                                <td id="dp-wednesday-period-1"></td>
+                                <td id="dp-thursday-period-1"></td>
+                                <td id="dp-friday-period-1"></td>
                             </tr>
                             <tr>
                                 <td>2 8:30-9:20</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="dp-monday-period-2"></td>
+                                <td id="dp-tuesday-period-2"></td>
+                                <td id="dp-wednesday-period-2"></td>
+                                <td id="dp-thursday-period-2"></td>
+                                <td id="dp-friday-period-2"></td>
                             </tr>
                             <tr>
                                 <td>3 9:35-10:25</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="dp-monday-period-3"></td>
+                                <td id="dp-tuesday-period-3"></td>
+                                <td id="dp-wednesday-period-3"></td>
+                                <td id="dp-thursday-period-3"></td>
+                                <td id="dp-friday-period-3"></td>
                             </tr>
                             <tr>
                                 <td>4 10:40-11:30</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="dp-monday-period-4"></td>
+                                <td id="dp-tuesday-period-4"></td>
+                                <td id="dp-wednesday-period-4"></td>
+                                <td id="dp-thursday-period-4"></td>
+                                <td id="dp-friday-period-4"></td>
                             </tr>
                             <tr>
                                 <td>5 11:45-12:35</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="dp-monday-period-5"></td>
+                                <td id="dp-tuesday-period-5"></td>
+                                <td id="dp-wednesday-period-5"></td>
+                                <td id="dp-thursday-period-5"></td>
+                                <td id="dp-friday-period-5"></td>
                             </tr>
                             <tr>
                                 <td>6 12:50-1:40</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="dp-monday-period-6"></td>
+                                <td id="dp-tuesday-period-6"></td>
+                                <td id="dp-wednesday-period-6"></td>
+                                <td id="dp-thursday-period-6"></td>
+                                <td id="dp-friday-period-6"></td>
                             </tr>
                             <tr>
                                 <td>7 1:55-2:45</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="dp-monday-period-7"></td>
+                                <td id="dp-tuesday-period-7"></td>
+                                <td id="dp-wednesday-period-7"></td>
+                                <td id="dp-thursday-period-7"></td>
+                                <td id="dp-friday-period-7"></td>
                             </tr>
                             <tr>
                                 <td>8 3:00-3:50</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="dp-monday-period-8"></td>
+                                <td id="dp-tuesday-period-8"></td>
+                                <td id="dp-wednesday-period-8"></td>
+                                <td id="dp-thursday-period-8"></td>
+                                <td id="dp-friday-period-8"></td>
                             </tr>
                             <tr>
                                 <td>9 4:05-4:55</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="dp-monday-period-9"></td>
+                                <td id="dp-tuesday-period-9"></td>
+                                <td id="dp-wednesday-period-9"></td>
+                                <td id="dp-thursday-period-9"></td>
+                                <td id="dp-friday-period-9"></td>
                             </tr>
                             <tr>
                                 <td>10 5:10-6:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="dp-monday-period-10"></td>
+                                <td id="dp-tuesday-period-10"></td>
+                                <td id="dp-wednesday-period-10"></td>
+                                <td id="dp-thursday-period-10"></td>
+                                <td id="dp-friday-period-10"></td>
                             </tr>
                             <tr>
                                 <td>11 6:15-7:05</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="dp-monday-period-11"></td>
+                                <td id="dp-tuesday-period-11"></td>
+                                <td id="dp-wednesday-period-11"></td>
+                                <td id="dp-thursday-period-11"></td>
+                                <td id="dp-friday-period-11"></td>
                             </tr>
                         </tbody>
-                    </table>
-                </div>
-        </main>
-    </body>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
 </html>
