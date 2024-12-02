@@ -103,10 +103,12 @@ def greedy_schedule(class_map):
                 else:
                     print(f"{uf_class.name} unsuccessfully added")
     greedy_week.print_schedule()
+    return greedy_week, total_credits
 
 def dp_schedule(class_map):
     credit_limit = 18
     max_classes = 0
+    best_num_credits = 0
     dp_week = Week()
     schedule_states = {0: (Week(), 0)}
 
@@ -134,4 +136,6 @@ def dp_schedule(class_map):
                             next_states[new_credits] = (new_schedule, new_num_classes)
         schedule_states = next_states
 
-    return dp_week, max_classes, best_num_credits
+    dp_week.print_schedule()
+
+    return dp_week, best_num_credits

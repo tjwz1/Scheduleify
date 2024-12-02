@@ -19,7 +19,6 @@ def print_class_map(class_map):
                     print(f"    Start Period: {meeting['start_period']}")
                     print(f"    End Period: {meeting['end_period']}")
 
-
 def parse_data(class_name, class_data):
     if not class_data or not isinstance(class_data, list):
         raise ValueError(f"Invalid data format for class {class_name}: {class_data}")
@@ -78,10 +77,9 @@ if __name__ == "__main__":
         "last-row": 0
     }
 
+    # Fetch and parse data for each course
     for course in classes:
-        # Update the 'course-code' parameter for each class
         params["course-code"] = course
-
         print(f"Sending request for course: {course}")
         try:
             response = requests.get(base_url, params=params)
@@ -96,15 +94,12 @@ if __name__ == "__main__":
                 new_class = parse_data(course, data)
                 classMap[course] = new_class
 
-                #print(f"Raw Response for {course}:")
-                #print(data)
-
             else:
                 print(f"Error for {course}: {response.status_code}")
                 print("Response text:", response.text)
 
         except requests.exceptions.RequestException as e:
             print(f"An error occurred for {course}: {e}")
-    #best_schedule, best_num_classes, c = dp_schedule(classMap)
     print_class_map(classMap)
     greedy_schedule(classMap)
+    #dp_schedule(classMap)

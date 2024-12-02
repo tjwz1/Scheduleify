@@ -1,54 +1,37 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import requests
-from UFClass import *
 from Schedule import *
-from Schedule import greedy_schedule
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:3000"}})
 
-
-def dp_schedule(class_map):
-    credit_limit = 18
-    max_classes = 0
-    best_num_credits = 0
-    final_schedule = Week()
-    schedule_states = {0: (Week(), 0)}
-
+def print_class_map(class_map):
     for class_name, uf_classes in class_map.items():
-        next_states = {}
+        print(f"{uf_classes}")
+        for uf_class in uf_classes:
+            print(f"\nClass Name: {uf_class.name}")
+            print(f"Class Code: {uf_class.code}")
+            print(f"Sections:")
 
-        for current_credits, (current_schedule, current_num_classes) in schedule_states.items():
-            for uf_class in uf_classes:
-                for section in uf_class.sections:
-                    new_schedule = current_schedule.copy()
+            for section in uf_class.sections:
+                print(f"  Section code: {section.code}")
+                print(f"  Credits: {section.credit}")
+                print(f"  Meeting Times:")
 
-                    if new_schedule.add_class(section):
-                        new_credits = current_credits + section.credit
-
-                        if new_credits > credit_limit:
-                            new_schedule.remove_class(section)
-                            continue
-                        new_num_classes = sum(len(day.classes) for day in new_schedule.days.values())
-                        if new_num_classes > max_classes or (
-                                new_num_classes == max_classes and new_credits > best_num_credits):
-                            max_classes = new_num_classes
-                            final_schedule = new_schedule.copy()
-                            best_num_credits = new_credits
-                        if new_credits not in next_states:
-                            next_states[new_credits] = (new_schedule, new_num_classes)
-        schedule_states = next_states
-
-    return final_schedule, best_num_credits
-
+                for meeting in section.meetings:
+                    print(f"    Days: {meeting['days']}")
+                    print(f"    Start Period: {meeting['start_period']}")
+                    print(f"    End Period: {meeting['end_period']}")
 
 def parse_data(class_name, class_data):
     if not class_data or not isinstance(class_data, list):
         raise ValueError(f"Invalid data format for class {class_name}: {class_data}")
 
+    # Iterate through all elements in class_data
     uf_classes = []
     for response_data in class_data:
+        # Extract course details from each response_data
         courses = response_data.get("COURSES", [])
         if not courses:
             raise ValueError(f"No course data found for {class_name}: {response_data}")
@@ -57,13 +40,13 @@ def parse_data(class_name, class_data):
             sections_data = each_course.get("sections", [])
             class_name = each_course.get('name', " ")
             class_code = each_course.get("code", " ")
-            uf_class = UFClass(name=class_name, sections=[], code=class_code)
+            uf_class = Course(name=class_name, sections=[], code=class_code)
 
             for each_section in sections_data:
                 credit = each_section.get("credits")
                 meet_times = each_section.get("meetTimes", [])
                 section_code = each_section.get("classNumber", 0)
-                section = Section(credit=credit, code=section_code)
+                section = Section(credit=credit, code=section_code, course=class_code)
 
                 for meet_time in meet_times:
                     days = meet_time.get("meetDays", [])
@@ -92,11 +75,15 @@ def generate_schedules():
         print(f"DEBUG: Courses to fetch: {courses}")
 
         class_map = {}
+
+        # Base URL for the API
         base_url = "https://one.ufl.edu/apix/soc/schedule/"
+
+        # Query Parameters
         params = {
             "category": "CWSP",
             "term": "2251",
-            "course-code": "",
+            "course-code": "", # Leave this empty initially
             "last-row": 0
         }
 
@@ -104,16 +91,23 @@ def generate_schedules():
         for course in courses:
             params["course-code"] = course
             print(f"DEBUG: Sending request for course {course}")
+
             response = requests.get(base_url, params=params)
+            # Print the response status code
+            print(f"Response Status Code: {response.status_code}")
 
             if response.status_code == 200:
                 data = response.json()
+
                 parsed_classes = parse_data(course, data)
                 class_map[course] = parsed_classes
                 print(f"DEBUG: Parsed classes for {course}")
+
             else:
                 print(f"ERROR: Failed to fetch data for {course}, Status Code: {response.status_code}")
                 return jsonify({"status": "error", "message": f"Failed to fetch data for {course}"}), 500
+
+        print_class_map(class_map)
 
         # Run DP and Greedy algorithms
         dp_week, dp_total_credits = dp_schedule(class_map)
@@ -138,13 +132,18 @@ def generate_schedules():
 
 def format_week(week):
     schedule = {}
+
+    # iterate through each day of the week
     for day_name, day_obj in week.days.items():
         schedule[day_name] = []
+
+        # iterate through each class section on the current day
         for section in day_obj.classes:
-            if section:
+            if section: # if section exists then iterate through each meeting of the section
                 for meeting in section.meetings:
                     schedule[day_name].append({
-                        "class_name": section.code,
+                        "class_name": section.course,
+                        "section_code": section.code,
                         "start_period": meeting["start_period"],
                         "end_period": meeting["end_period"]
                     })
