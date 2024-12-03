@@ -13,6 +13,7 @@ document.getElementById("generate-schedules").addEventListener("click", async ()
 
         const data = await response.json();
         if (data.status === "success") {
+            clearSchedule();
             populateSchedule("dp", data.dp_schedule);
             populateSchedule("greedy", data.greedy_schedule);
 
@@ -27,7 +28,22 @@ document.getElementById("generate-schedules").addEventListener("click", async ()
     }
 });
 
+function clearSchedule() {
+    const rows = document.querySelectorAll("#greedy-table tr, #dp-table tr");
+
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        
+        for (let i = 1; i < cells.length; i++) {
+            cells[i].textContent = '';
+        }
+    });
+
+    console.log("Table cleared")
+}
+
 function populateSchedule(algoType, schedule) {
+
     for (const [day, classes] of Object.entries(schedule)) {
         classes.forEach(cls => {
             cellId = `${algoType}-${day}-period-${cls.start_period}`;

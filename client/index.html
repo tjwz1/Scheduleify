@@ -36,7 +36,7 @@
         <div class="main-block">
             <div class="block">
                 <p>Schedule built using Greedy Algorithm</p>
-                <table>
+                <table id="greedy-table">
                     <thead>
                         <tr>
                             <th>Periods\Day</th>
@@ -49,127 +49,124 @@
                     </thead>
                     <tbody>
                         <!-- Rows for each period -->
-                        <tbody>
-                            <tr>
-                                <td>1 7:25-8:15</td>
-                                <td id="greedy-M-period-1"></td>
-                                <td id="greedy-T-period-1"></td>
-                                <td id="greedy-W-period-1"></td>
-                                <td id="greedy-R-period-1"></td>
-                                <td id="greedy-F-period-1"></td>
-                            </tr>
-                            <tr>
-                                <td>2 8:30-9:20</td>
-                                <td id="greedy-M-period-2"></td>
-                                <td id="greedy-T-period-2"></td>
-                                <td id="greedy-W-period-2"></td>
-                                <td id="greedy-R-period-2"></td>
-                                <td id="greedy-F-period-2"></td>
-                            </tr>
-                            <tr>
-                                <td>3 9:35-10:25</td>
-                                <td id="greedy-M-period-3"></td>
-                                <td id="greedy-T-period-3"></td>
-                                <td id="greedy-W-period-3"></td>
-                                <td id="greedy-R-period-3"></td>
-                                <td id="greedy-F-period-3"></td>
-                            </tr>
-                            <tr>
-                                <td>4 10:40-11:30</td>
-                                <td id="greedy-M-period-4"></td>
-                                <td id="greedy-T-period-4"></td>
-                                <td id="greedy-W-period-4"></td>
-                                <td id="greedy-R-period-4"></td>
-                                <td id="greedy-F-period-4"></td>
-                            </tr>
-                            <tr>
-                                <td>5 11:45-12:35</td>
-                                <td id="greedy-M-period-5"></td>
-                                <td id="greedy-T-period-5"></td>
-                                <td id="greedy-W-period-5"></td>
-                                <td id="greedy-R-period-5"></td>
-                                <td id="greedy-F-period-5"></td>
-                            </tr>
-                            <tr>
-                                <td>6 12:50-1:40</td>
-                                <td id="greedy-M-period-6"></td>
-                                <td id="greedy-T-period-6"></td>
-                                <td id="greedy-W-period-6"></td>
-                                <td id="greedy-R-period-6"></td>
-                                <td id="greedy-F-period-6"></td>
-                            </tr>
-                            <tr>
-                                <td>7 1:55-2:45</td>
-                                <td id="greedy-M-period-7"></td>
-                                <td id="greedy-T-period-7"></td>
-                                <td id="greedy-W-period-7"></td>
-                                <td id="greedy-R-period-7"></td>
-                                <td id="greedy-F-period-7"></td>
-                            </tr>
-                            <tr>
-                                <td>8 3:00-3:50</td>
-                                <td id="greedy-M-period-8"></td>
-                                <td id="greedy-T-period-8"></td>
-                                <td id="greedy-W-period-8"></td>
-                                <td id="greedy-R-period-8"></td>
-                                <td id="greedy-F-period-8"></td>
-                            </tr>
-                            <tr>
-                                <td>9 4:05-4:55</td>
-                                <td id="greedy-M-period-9"></td>
-                                <td id="greedy-T-period-9"></td>
-                                <td id="greedy-W-period-9"></td>
-                                <td id="greedy-R-period-9"></td>
-                                <td id="greedy-F-period-9"></td>
-                            </tr>
-                            <tr>
-                                <td>10 5:10-6:00</td>
-                                <td id="greedy-M-period-10"></td>
-                                <td id="greedy-T-period-10"></td>
-                                <td id="greedy-W-period-10"></td>
-                                <td id="greedy-R-period-10"></td>
-                                <td id="greedy-F-period-10"></td>
-                            </tr>
-                            <tr>
-                                <td>11 6:15-7:05</td>
-                                <td id="greedy-M-period-11"></td>
-                                <td id="greedy-T-period-11"></td>
-                                <td id="greedy-W-period-11"></td>
-                                <td id="greedy-R-period-11"></td>
-                                <td id="greedy-F-period-11"></td>
-                            </tr>
-                            <tr>
-                                <td>E1 7:20-8:10</td>
-                                <td id="greedy-M-period-11"></td>
-                                <td id="greedy-T-period-11"></td>
-                                <td id="greedy-W-period-11"></td>
-                                <td id="greedy-R-period-11"></td>
-                                <td id="greedy-F-period-11"></td>
-                            </tr>
-                            <tr>
-                                <td>E2 8:25-9:15</td>
-                                <td id="greedy-M-period-11"></td>
-                                <td id="greedy-T-period-11"></td>
-                                <td id="greedy-W-period-11"></td>
-                                <td id="greedy-R-period-11"></td>
-                                <td id="greedy-F-period-11"></td>
-                            </tr>
-                            <tr>
-                                <td>E3 9:30-10:20</td>
-                                <td id="greedy-M-period-11"></td>
-                                <td id="greedy-T-period-11"></td>
-                                <td id="greedy-W-period-11"></td>
-                                <td id="greedy-R-period-11"></td>
-                                <td id="greedy-F-period-11"></td>
-                            </tr>
-                        </tbody>
-                        
+                        <tr>
+                            <td>1 7:25-8:15</td>
+                            <td id="greedy-M-period-1"></td>
+                            <td id="greedy-T-period-1"></td>
+                            <td id="greedy-W-period-1"></td>
+                            <td id="greedy-R-period-1"></td>
+                            <td id="greedy-F-period-1"></td>
+                        </tr>
+                        <tr>
+                            <td>2 8:30-9:20</td>
+                            <td id="greedy-M-period-2"></td>
+                            <td id="greedy-T-period-2"></td>
+                            <td id="greedy-W-period-2"></td>
+                            <td id="greedy-R-period-2"></td>
+                            <td id="greedy-F-period-2"></td>
+                        </tr>
+                        <tr>
+                            <td>3 9:35-10:25</td>
+                            <td id="greedy-M-period-3"></td>
+                            <td id="greedy-T-period-3"></td>
+                            <td id="greedy-W-period-3"></td>
+                            <td id="greedy-R-period-3"></td>
+                            <td id="greedy-F-period-3"></td>
+                        </tr>
+                        <tr>
+                            <td>4 10:40-11:30</td>
+                            <td id="greedy-M-period-4"></td>
+                            <td id="greedy-T-period-4"></td>
+                            <td id="greedy-W-period-4"></td>
+                            <td id="greedy-R-period-4"></td>
+                            <td id="greedy-F-period-4"></td>
+                        </tr>
+                        <tr>
+                            <td>5 11:45-12:35</td>
+                            <td id="greedy-M-period-5"></td>
+                            <td id="greedy-T-period-5"></td>
+                            <td id="greedy-W-period-5"></td>
+                            <td id="greedy-R-period-5"></td>
+                            <td id="greedy-F-period-5"></td>
+                        </tr>
+                        <tr>
+                            <td>6 12:50-1:40</td>
+                            <td id="greedy-M-period-6"></td>
+                            <td id="greedy-T-period-6"></td>
+                            <td id="greedy-W-period-6"></td>
+                            <td id="greedy-R-period-6"></td>
+                            <td id="greedy-F-period-6"></td>
+                        </tr>
+                        <tr>
+                            <td>7 1:55-2:45</td>
+                            <td id="greedy-M-period-7"></td>
+                            <td id="greedy-T-period-7"></td>
+                            <td id="greedy-W-period-7"></td>
+                            <td id="greedy-R-period-7"></td>
+                            <td id="greedy-F-period-7"></td>
+                        </tr>
+                        <tr>
+                            <td>8 3:00-3:50</td>
+                            <td id="greedy-M-period-8"></td>
+                            <td id="greedy-T-period-8"></td>
+                            <td id="greedy-W-period-8"></td>
+                            <td id="greedy-R-period-8"></td>
+                            <td id="greedy-F-period-8"></td>
+                        </tr>
+                        <tr>
+                            <td>9 4:05-4:55</td>
+                            <td id="greedy-M-period-9"></td>
+                            <td id="greedy-T-period-9"></td>
+                            <td id="greedy-W-period-9"></td>
+                            <td id="greedy-R-period-9"></td>
+                            <td id="greedy-F-period-9"></td>
+                        </tr>
+                        <tr>
+                            <td>10 5:10-6:00</td>
+                            <td id="greedy-M-period-10"></td>
+                            <td id="greedy-T-period-10"></td>
+                            <td id="greedy-W-period-10"></td>
+                            <td id="greedy-R-period-10"></td>
+                            <td id="greedy-F-period-10"></td>
+                        </tr>
+                        <tr>
+                            <td>11 6:15-7:05</td>
+                            <td id="greedy-M-period-11"></td>
+                            <td id="greedy-T-period-11"></td>
+                            <td id="greedy-W-period-11"></td>
+                            <td id="greedy-R-period-11"></td>
+                            <td id="greedy-F-period-11"></td>
+                        </tr>
+                        <tr>
+                            <td>E1 7:20-8:10</td>
+                            <td id="greedy-M-period-12"></td>
+                            <td id="greedy-T-period-12"></td>
+                            <td id="greedy-W-period-12"></td>
+                            <td id="greedy-R-period-12"></td>
+                            <td id="greedy-F-period-12"></td>
+                        </tr>
+                        <tr>
+                            <td>E2 8:25-9:15</td>
+                            <td id="greedy-M-period-13"></td>
+                            <td id="greedy-T-period-13"></td>
+                            <td id="greedy-W-period-13"></td>
+                            <td id="greedy-R-period-13"></td>
+                            <td id="greedy-F-period-13"></td>
+                        </tr>
+                        <tr>
+                            <td>E3 9:30-10:20</td>
+                            <td id="greedy-M-period-14"></td>
+                            <td id="greedy-T-period-14"></td>
+                            <td id="greedy-W-period-14"></td>
+                            <td id="greedy-R-period-14"></td>
+                            <td id="greedy-F-period-14"></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
             <div class="block">
                 <p>Schedule built using DP Algorithm</p>
-                <table>
+                <table id="dp-table">
                     <thead>
                         <tr>
                             <th>Periods\Day</th>
@@ -182,120 +179,118 @@
                     </thead>
                     <tbody>
                         <!-- Rows for each period -->
-                        <tbody>
-                            <tr>
-                                <td>1 7:25-8:15</td>
-                                <td id="dp-M-period-1"></td>
-                                <td id="dp-T-period-1"></td>
-                                <td id="dp-W-period-1"></td>
-                                <td id="dp-R-period-1"></td>
-                                <td id="dp-F-period-1"></td>
-                            </tr>
-                            <tr>
-                                <td>2 8:30-9:20</td>
-                                <td id="dp-M-period-2"></td>
-                                <td id="dp-T-period-2"></td>
-                                <td id="dp-W-period-2"></td>
-                                <td id="dp-R-period-2"></td>
-                                <td id="dp-F-period-2"></td>
-                            </tr>
-                            <tr>
-                                <td>3 9:35-10:25</td>
-                                <td id="dp-M-period-3"></td>
-                                <td id="dp-T-period-3"></td>
-                                <td id="dp-W-period-3"></td>
-                                <td id="dp-R-period-3"></td>
-                                <td id="dp-F-period-3"></td>
-                            </tr>
-                            <tr>
-                                <td>4 10:40-11:30</td>
-                                <td id="dp-M-period-4"></td>
-                                <td id="dp-T-period-4"></td>
-                                <td id="dp-W-period-4"></td>
-                                <td id="dp-R-period-4"></td>
-                                <td id="dp-F-period-4"></td>
-                            </tr>
-                            <tr>
-                                <td>5 11:45-12:35</td>
-                                <td id="dp-M-period-5"></td>
-                                <td id="dp-T-period-5"></td>
-                                <td id="dp-W-period-5"></td>
-                                <td id="dp-R-period-5"></td>
-                                <td id="dp-F-period-5"></td>
-                            </tr>
-                            <tr>
-                                <td>6 12:50-1:40</td>
-                                <td id="dp-M-period-6"></td>
-                                <td id="dp-T-period-6"></td>
-                                <td id="dp-W-period-6"></td>
-                                <td id="dp-R-period-6"></td>
-                                <td id="dp-F-period-6"></td>
-                            </tr>
-                            <tr>
-                                <td>7 1:55-2:45</td>
-                                <td id="dp-M-period-7"></td>
-                                <td id="dp-T-period-7"></td>
-                                <td id="dp-W-period-7"></td>
-                                <td id="dp-R-period-7"></td>
-                                <td id="dp-F-period-7"></td>
-                            </tr>
-                            <tr>
-                                <td>8 3:00-3:50</td>
-                                <td id="dp-M-period-8"></td>
-                                <td id="dp-T-period-8"></td>
-                                <td id="dp-W-period-8"></td>
-                                <td id="dp-R-period-8"></td>
-                                <td id="dp-F-period-8"></td>
-                            </tr>
-                            <tr>
-                                <td>9 4:05-4:55</td>
-                                <td id="dp-M-period-9"></td>
-                                <td id="dp-T-period-9"></td>
-                                <td id="dp-W-period-9"></td>
-                                <td id="dp-R-period-9"></td>
-                                <td id="dp-F-period-9"></td>
-                            </tr>
-                            <tr>
-                                <td>10 5:10-6:00</td>
-                                <td id="dp-M-period-10"></td>
-                                <td id="dp-T-period-10"></td>
-                                <td id="dp-W-period-10"></td>
-                                <td id="dp-R-period-10"></td>
-                                <td id="dp-F-period-10"></td>
-                            </tr>
-                            <tr>
-                                <td>11 6:15-7:05</td>
-                                <td id="dp-M-period-11"></td>
-                                <td id="dp-T-period-11"></td>
-                                <td id="dp-W-period-11"></td>
-                                <td id="dp-R-period-11"></td>
-                                <td id="dp-F-period-11"></td>
-                            </tr>
-                            <tr>
-                                <td>E1 7:20-8:10</td>
-                                <td id="dp-M-period-11"></td>
-                                <td id="dp-T-period-11"></td>
-                                <td id="dp-W-period-11"></td>
-                                <td id="dp-R-period-11"></td>
-                                <td id="dp-F-period-11"></td>
-                            </tr>
-                            <tr>
-                                <td>E2 8:25-9:15</td>
-                                <td id="dp-M-period-11"></td>
-                                <td id="dp-T-period-11"></td>
-                                <td id="dp-W-period-11"></td>
-                                <td id="dp-R-period-11"></td>
-                                <td id="dp-F-period-11"></td>
-                            </tr>
-                            <tr>
-                                <td>E3 9:30-10:20</td>
-                                <td id="dp-M-period-11"></td>
-                                <td id="dp-T-period-11"></td>
-                                <td id="dp-W-period-11"></td>
-                                <td id="dp-R-period-11"></td>
-                                <td id="dp-F-period-11"></td>
-                            </tr>
-                        </tbody>
+                        <tr>
+                            <td>1 7:25-8:15</td>
+                            <td id="dp-M-period-1"></td>
+                            <td id="dp-T-period-1"></td>
+                            <td id="dp-W-period-1"></td>
+                            <td id="dp-R-period-1"></td>
+                            <td id="dp-F-period-1"></td>
+                        </tr>
+                        <tr>
+                            <td>2 8:30-9:20</td>
+                            <td id="dp-M-period-2"></td>
+                            <td id="dp-T-period-2"></td>
+                            <td id="dp-W-period-2"></td>
+                            <td id="dp-R-period-2"></td>
+                            <td id="dp-F-period-2"></td>
+                        </tr>
+                        <tr>
+                            <td>3 9:35-10:25</td>
+                            <td id="dp-M-period-3"></td>
+                            <td id="dp-T-period-3"></td>
+                            <td id="dp-W-period-3"></td>
+                            <td id="dp-R-period-3"></td>
+                            <td id="dp-F-period-3"></td>
+                        </tr>
+                        <tr>
+                            <td>4 10:40-11:30</td>
+                            <td id="dp-M-period-4"></td>
+                            <td id="dp-T-period-4"></td>
+                            <td id="dp-W-period-4"></td>
+                            <td id="dp-R-period-4"></td>
+                            <td id="dp-F-period-4"></td>
+                        </tr>
+                        <tr>
+                            <td>5 11:45-12:35</td>
+                            <td id="dp-M-period-5"></td>
+                            <td id="dp-T-period-5"></td>
+                            <td id="dp-W-period-5"></td>
+                            <td id="dp-R-period-5"></td>
+                            <td id="dp-F-period-5"></td>
+                        </tr>
+                        <tr>
+                            <td>6 12:50-1:40</td>
+                            <td id="dp-M-period-6"></td>
+                            <td id="dp-T-period-6"></td>
+                            <td id="dp-W-period-6"></td>
+                            <td id="dp-R-period-6"></td>
+                            <td id="dp-F-period-6"></td>
+                        </tr>
+                        <tr>
+                            <td>7 1:55-2:45</td>
+                            <td id="dp-M-period-7"></td>
+                            <td id="dp-T-period-7"></td>
+                            <td id="dp-W-period-7"></td>
+                            <td id="dp-R-period-7"></td>
+                            <td id="dp-F-period-7"></td>
+                        </tr>
+                        <tr>
+                            <td>8 3:00-3:50</td>
+                            <td id="dp-M-period-8"></td>
+                            <td id="dp-T-period-8"></td>
+                            <td id="dp-W-period-8"></td>
+                            <td id="dp-R-period-8"></td>
+                            <td id="dp-F-period-8"></td>
+                        </tr>
+                        <tr>
+                            <td>9 4:05-4:55</td>
+                            <td id="dp-M-period-9"></td>
+                            <td id="dp-T-period-9"></td>
+                            <td id="dp-W-period-9"></td>
+                            <td id="dp-R-period-9"></td>
+                            <td id="dp-F-period-9"></td>
+                        </tr>
+                        <tr>
+                            <td>10 5:10-6:00</td>
+                            <td id="dp-M-period-10"></td>
+                            <td id="dp-T-period-10"></td>
+                            <td id="dp-W-period-10"></td>
+                            <td id="dp-R-period-10"></td>
+                            <td id="dp-F-period-10"></td>
+                        </tr>
+                        <tr>
+                            <td>11 6:15-7:05</td>
+                            <td id="dp-M-period-11"></td>
+                            <td id="dp-T-period-11"></td>
+                            <td id="dp-W-period-11"></td>
+                            <td id="dp-R-period-11"></td>
+                            <td id="dp-F-period-11"></td>
+                        </tr>
+                        <tr>
+                            <td>E1 7:20-8:10</td>
+                            <td id="dp-M-period-12"></td>
+                            <td id="dp-T-period-12"></td>
+                            <td id="dp-W-period-12"></td>
+                            <td id="dp-R-period-12"></td>
+                            <td id="dp-F-period-12"></td>
+                        </tr>
+                        <tr>
+                            <td>E2 8:25-9:15</td>
+                            <td id="dp-M-period-13"></td>
+                            <td id="dp-T-period-13"></td>
+                            <td id="dp-W-period-13"></td>
+                            <td id="dp-R-period-13"></td>
+                            <td id="dp-F-period-13"></td>
+                        </tr>
+                        <tr>
+                            <td>E3 9:30-10:20</td>
+                            <td id="dp-M-period-14"></td>
+                            <td id="dp-T-period-14"></td>
+                            <td id="dp-W-period-14"></td>
+                            <td id="dp-R-period-14"></td>
+                            <td id="dp-F-period-14"></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
