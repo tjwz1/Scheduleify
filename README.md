@@ -33,7 +33,7 @@ Ensure you have the following installed on your system:
 3. Start the Flask server by running:
 
    ```bash
-   python server.py
+   python app.py
    ```
 
    This will host the API locally.
