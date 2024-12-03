@@ -110,8 +110,8 @@ def generate_schedules():
         print_class_map(class_map)
 
         # Run DP and Greedy algorithms
-        dp_week, dp_total_credits = dp_schedule(class_map)
         greedy_week, greedy_total_credits = greedy_schedule(class_map)
+        dp_week, dp_total_credits = dp_schedule(class_map)
 
         # Format schedules into JSON
         dp_schedule_data = format_week(dp_week)
@@ -132,23 +132,22 @@ def generate_schedules():
 
 def format_week(week):
     schedule = {}
-
     # iterate through each day of the week
     for day_name, day_obj in week.days.items():
         schedule[day_name] = []
-
         # iterate through each class section on the current day
         for section in day_obj.classes:
             if section: # if section exists then iterate through each meeting of the section
                 for meeting in section.meetings:
-                    schedule[day_name].append({
-                        "class_name": section.course,
-                        "section_code": section.code,
-                        "start_period": meeting["start_period"],
-                        "end_period": meeting["end_period"]
-                    })
+                    for day in meeting["days"]:
+                        if day == day_name:
+                            schedule[day_name].append({
+                                "class_name": section.course,
+                                "section_code": section.code,
+                                "start_period": meeting["start_period"],
+                                "end_period": meeting["end_period"]
+                            })
     return schedule
-
 
 if __name__ == "__main__":
     app.run(debug=True)

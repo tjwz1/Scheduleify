@@ -36,7 +36,7 @@ class Week:
     def add_class(self, section):
         # check if the current section is already scheduled
         if section in self.courses:
-            print(f"Course {section.code} is already scheduled.")
+            print(f"Course {section.course} is already scheduled.")
             return False
         
         # check if the current section has conflict periods with another section
@@ -55,8 +55,8 @@ class Week:
                 
                 self.days[day].add_class(section, int(meeting["start_period"]), int(meeting["end_period"]))
         
-        self.courses.add(section)
-        print(f"{section.course}, section number: {section.code} successfully added to schedule")
+        self.courses.add(section.course)
+        #print(f"{section.course}, section number: {section.code} successfully added to schedule")
         return True
 
     def remove_class(self, section):

@@ -30,10 +30,17 @@ document.getElementById("generate-schedules").addEventListener("click", async ()
 function populateSchedule(algoType, schedule) {
     for (const [day, classes] of Object.entries(schedule)) {
         classes.forEach(cls => {
-            const cellId = `${algoType}-${day}-period-${cls.start_period}`;
-            const cell = document.getElementById(cellId);
+            cellId = `${algoType}-${day}-period-${cls.start_period}`;
+            cell = document.getElementById(cellId);
             if (cell) {
                 cell.textContent = cls.class_name; // Populate the cell with the class name
+            }
+            if (cls.start_period != cls.end_period) {
+                cellId = `${algoType}-${day}-period-${cls.end_period}`;
+                cell = document.getElementById(cellId);
+                if (cell) {
+                    cell.textContent = cls.class_name; // Populate the cell with the class name
+                }
             }
         });
     }
