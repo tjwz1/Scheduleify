@@ -74,6 +74,9 @@ def generate_schedules():
         courses = data["courses"]
         print(f"DEBUG: Courses to fetch: {courses}")
 
+        if not courses or all(course.strip() == '' for course in courses):
+            return jsonify({"status": "error", "message": "Please input at least one course"}), 400
+
         class_map = {}
 
         # Base URL for the API
