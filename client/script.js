@@ -51,13 +51,6 @@ function populateSchedule(algoType, schedule) {
             if (cell) {
                 cell.textContent = cls.class_name; // Populate the cell with the class name
             }
-            if (cls.start_period != cls.end_period) {
-                cellId = `${algoType}-${day}-period-${cls.end_period}`;
-                cell = document.getElementById(cellId);
-                if (cell) {
-                    cell.textContent = cls.class_name; // Populate the cell with the class name
-                }
-            }
         });
     }
 }
