@@ -139,17 +139,12 @@ def format_week(week):
     for day_name, day_obj in week.days.items():
         schedule[day_name] = []
         # iterate through each class section on the current day
-        for section in day_obj.classes:
-            if section: # if section exists then iterate through each meeting of the section
-                for meeting in section.meetings:
-                    for day in meeting["days"]:
-                        if day == day_name:
-                            schedule[day_name].append({
-                                "class_name": section.course,
-                                "section_code": section.code,
-                                "start_period": meeting["start_period"],
-                                "end_period": meeting["end_period"]
-                            })
+        for period, section in day_obj.periods.items():
+            schedule[day_name].append({
+                "class_name": section.course,
+                "section_code": section.code,
+                "start_period": period
+            })
     return schedule
 
 if __name__ == "__main__":

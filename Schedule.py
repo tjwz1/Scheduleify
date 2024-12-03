@@ -4,28 +4,29 @@ from Course import *
 
 class Day:
     def __init__(self):
-        self.classes = [None] * 14
+        self.periods = {}
 
     # add a class to a specific period of the day
     def add_class(self, section, start_period, end_period):
-        for period in range(start_period - 1, end_period):
-            self.classes[period] = section
+        self.periods[start_period] = section
+        self.periods[end_period] = section
         return True
 
     # delete all occurence of a section in the day
     def remove_class(self, section):
-        for i in range(len(self.classes)):
-            if self.classes[i] == section:
-                self.classes[i] = None  # Remove class from the period
+        for period in self.periods:
+            if self.periods[period] == section:
+                del self.periods[period] # Remove class from the period
+
         return True
 
     # check if the current period is occupied by a section
     def is_period_occupied(self, start_period, end_period):
-        for period in range(start_period - 1, end_period):
-            if self.classes[period] is not None:
-                return True
+        if start_period in self.periods:
+            return True
+        if end_period in self.periods:
+            return True
         return False
-
 
 class Week:
     def __init__(self):
@@ -35,14 +36,14 @@ class Week:
     # Add one section to the weekly schedule
     def add_class(self, section):
         # check if the current section is already scheduled
-        if section in self.courses:
+        if section.course in self.courses:
             print(f"Course {section.course} is already scheduled.")
             return False
         
         # check if the current section has conflict periods with another section
         for meeting in section.meetings:
             for day in meeting["days"]:
-                if self.days[day].is_period_occupied(int(meeting['start_period']), int(meeting['end_period'])):
+                if self.days[day].is_period_occupied(meeting['start_period'], meeting['end_period']):
                     return False
 
         # adds each meeting to its corresponding day of the week
@@ -53,34 +54,25 @@ class Week:
                     print(f"Invalid meeting day for {section.course}, section code: {section.code}")
                     return False
                 
-                self.days[day].add_class(section, int(meeting["start_period"]), int(meeting["end_period"]))
+                self.days[day].add_class(section, meeting["start_period"], meeting["end_period"])
         
         self.courses.add(section.course)
-        #print(f"{section.course}, section number: {section.code} successfully added to schedule")
         return True
 
     def remove_class(self, section):
-        if section not in self.courses:
+        if section.course not in self.courses:
             return True
         for meeting in section.meetings:
             for meet_day in meeting["days"]:
                 self.days[meet_day].remove_class(section)
-        self.courses.remove(section)
+        self.courses.remove(section.course)
         return True
 
     def print_schedule(self):
         for day, day_obj in self.days.items():
             print(f"\nSchedule for {day}:")
-            if day_obj.classes:
-                period = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "E1", "E2", "E3"]
-                index = 0
-                for section in day_obj.classes:
-                    if section is None:
-                        #print(f"No class scheduled for period {period[index]}")
-                        index += 1
-                        continue
-                    print(f"{section.course}, section number: {section.code} is scheduled for period {period[index]}")
-                    index += 1
+            for period, section in day_obj.periods.items():
+                print(f"{section.course}, section number: {section.code} is scheduled for period {period}")
 
     def copy(self):
         return copy.deepcopy(self)
@@ -126,7 +118,7 @@ def dp_schedule(class_map):
                         if new_credits > credit_limit:
                             new_schedule.remove_class(section)
                             continue
-                        new_num_classes = sum(len(day.classes) for day in new_schedule.days.values())
+                        new_num_classes = sum(len(day.periods) for day in new_schedule.days.values())
                         if new_num_classes > max_classes or (
                                 new_num_classes == max_classes and new_credits > best_num_credits):
                             max_classes = new_num_classes
